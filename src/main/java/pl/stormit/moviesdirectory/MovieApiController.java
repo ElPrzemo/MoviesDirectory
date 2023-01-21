@@ -2,10 +2,8 @@ package pl.stormit.moviesdirectory;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +12,7 @@ import java.util.UUID;
 @RequestMapping("api/v1/movies")
 @RequiredArgsConstructor
 
-public class MovieController {
+public class MovieApiController {
 
 
     private final MovieService movieService;
@@ -29,6 +27,24 @@ public class MovieController {
     Movie getMovie (@PathVariable UUID id){
         return movieService.getMovie(id);
     }
+
+    @PostMapping
+    Movie createMovie(@RequestBody Movie movie){
+        return movieService.createMovie(movie);
+
+    }
+
+    @PutMapping("{id}")
+    Movie updateMovie (@PathVariable UUID id, @RequestBody Movie movie) {
+        return movieService.updateMovie(id, movie);
+
+    }
+
+   @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteMovie(@PathVariable UUID id){
+        movieService.deleteMovie(id);
+   }
 
     //CRUD
     /*
