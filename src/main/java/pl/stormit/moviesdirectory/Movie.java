@@ -22,5 +22,10 @@ public class Movie {
         this.name = name;
     }
 
+    public Movie getMovie(UUID id){
+        Movie movie = new Movie("Movie" + id);
+        return movie;
+    }
+
 }
 
