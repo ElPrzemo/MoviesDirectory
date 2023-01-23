@@ -1,28 +1,27 @@
 package pl.stormit.moviesdirectory;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
+
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class MovieService {
-    ;
 
-    public List<Movie> getMovies() {
-        return Arrays.asList(
-                new Movie("Batman"),
-                new Movie("Rocky"),
-                new Movie("Superman 3")
-        );
+    private final MovieRepository movieRepository;
+
+    public Iterable<Movie> getMovies() {
+        return movieRepository.findAll();
+
     }
 
     public Movie getMovie(UUID id) {
-        Movie movie= new Movie("Movie"+id);
-        return movie;
+         return movieRepository.findById(id)
+        .orElseThrow();
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -18,7 +18,7 @@ public class MovieApiController {
     private final MovieService movieService;
 
     @GetMapping
-    List<Movie> getMovies(){
+    Iterable<Movie> getMovies(){
         return movieService.getMovies();
     }
 
