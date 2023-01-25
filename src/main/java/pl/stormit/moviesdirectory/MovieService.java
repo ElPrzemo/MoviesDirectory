@@ -15,7 +15,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     public Iterable<Movie> getMovies() {
-        return movieRepository.findAll();
+        return movieRepository.findAllWithCategories();
 
     }
 
