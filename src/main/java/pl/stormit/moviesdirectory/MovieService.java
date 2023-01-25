@@ -27,18 +27,23 @@ public class MovieService {
     @ResponseStatus(HttpStatus.CREATED)
     public Movie createMovie(Movie movie) {
         movie.setId(UUID.randomUUID());
-        // TODOD save movie\
+
+       movie = movieRepository.save(movie);
         return movie;
     }
 
 
     public Movie updateMovie(UUID id, Movie movie) {
-        movie.setId(id);
-        return movie;
+        Movie movieDB = movieRepository.findById(id)
+                .orElseThrow();
+
+        movieDB.setName(movieDB.getName());
+        movieDB = movieRepository.save(movieDB);
+        return movieDB;
     }
 
     public void deleteMovie (UUID id) {
-        //TODO delete movie
+       movieRepository.deleteById(id);
     }
 
 
